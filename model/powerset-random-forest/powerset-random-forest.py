@@ -18,6 +18,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
 from sklearn.externals import joblib
 print('Libraries Imported')
 
@@ -72,7 +73,14 @@ print('Testing ...')
 test_data_path = '../../data/clean_test.csv'
 test_data = preprocess.getPreprocessTrain(data_path)
 
+# vectorize text
+print('Vectorizing ...')
 test_x = vectorizer.transform(test_data['comment_text']).toarray()
+
+# Feature Scaling
+print('Feature Scaling ...')
+scaler = StandardScaler()
+test_x = scaler.transform(test_x)
 
 output = classifier.predict(test_x)
 output_df = pd.DataFrame({'label': output[:]})
