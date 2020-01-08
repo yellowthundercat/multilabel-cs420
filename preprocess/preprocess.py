@@ -24,6 +24,7 @@ def getPreprocessTrain(train_data_path):
 
 def getPreprocessText(test_data_path):
   test = pd.read_csv(test_data_path)
+  return test
 
 
 def clean_text(text, isRemoveDigit = True, isLemma = True, isStem = False):
