@@ -6,9 +6,11 @@ from sklearn.metrics import accuracy_score
 data_path = '../../data/train.csv'
 
 train_data = preprocess.getPreprocessTrain(data_path)
+separator = ' '
+train_data['comment_text'] = train_data['comment_text'].apply(lambda x: separator.join(x))
 
 # choosing number of data
-# train_data = train_data.loc[:100, :]
+train_data = train_data.loc[:100, :]
 
 import numpy as np
 import pandas as pd
@@ -72,6 +74,8 @@ print("\n")
 print('Testing ...')
 test_data_path = '../../data/clean_test.csv'
 test_data = preprocess.getPreprocessTrain(data_path)
+test_data = test_data.loc[:10, :]
+test_data['comment_text'] = test_data['comment_text'].apply(lambda x: separator.join(x))
 
 # vectorize text
 print('Vectorizing ...')
@@ -79,7 +83,6 @@ test_x = vectorizer.transform(test_data['comment_text']).toarray()
 
 # Feature Scaling
 print('Feature Scaling ...')
-scaler = StandardScaler()
 test_x = scaler.transform(test_x)
 
 output = classifier.predict(test_x)
