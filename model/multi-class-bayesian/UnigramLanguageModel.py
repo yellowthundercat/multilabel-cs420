@@ -20,7 +20,7 @@ class UnigramLanguageModel:
     
     totalWord = len(self.unigramCounts[0])
     for label in range(1, powerSet):
-      self.ukp[label] = (float(totalWord - len(self.unigramCounts[label])) / float(totalWord)) * 0.7
+      self.ukp[label] = (float(totalWord - len(self.unigramCounts[label])) / float(totalWord)) * 0.9
     print(self.total)
   
   def score(self, sentence):
@@ -42,13 +42,14 @@ class UnigramLanguageModel:
     maxLabel = 0
     maxScore = 0.0
     minDelta = 1
+    score[0] -= 0.05
     for i in range(0, powerSet):
       if (score[i] > maxScore):
         maxScore = score[i]
         maxLabel = i
-      elif minDelta > maxScore - score[i]:
-        minDelta = maxScore - score[i]
+      # elif minDelta > maxScore - score[i]:
+      #   minDelta = maxScore - score[i]
     
-    if minDelta < 1:
-      print(minDelta)
+    # if minDelta < 1:
+    #   print(minDelta)
     return maxLabel
