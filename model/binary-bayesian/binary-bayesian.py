@@ -55,8 +55,8 @@ for i in range(0, len(testLabel['id'])):
     # print(predict)
     # print(ArrayLabel[i])
     count += 1
-    if count > 200:
-      break
+    # if count > 5:
+    #   break
 # print (count, countRight, countDifZero)
 del testLabel['label']
 testLabel.to_csv('./binary-bayesian-result.csv',index=False)
