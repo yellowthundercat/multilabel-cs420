@@ -5,7 +5,7 @@ actual_label_path = '../data/clean_test_labels.csv'
 actual_label = pd.read_csv(actual_label_path)
 
 # load predicted labels
-pred_label_path = '../model/powerset-random-forest/powerset-random-forest(with 10000 0).csv'
+pred_label_path = '../model/binary-linear-svc/binary-linear_svc.csv'
 pred_label = pd.read_csv(pred_label_path)
 
 
