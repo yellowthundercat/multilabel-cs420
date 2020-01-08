@@ -4,11 +4,11 @@ powerSet = (1 << 6)
 class UnigramLanguageModel:
 
   def __init__(self, corpus):
-    self.unigramCounts = [collections.defaultdict(lambda: 0)] * powerSet
-    self.total = [0] * powerSet
+    self.unigramCounts = [collections.defaultdict(lambda: 0) for i in range(powerSet)]
+    self.total = [0 for i in range(powerSet)]
     self.N = 13000 # estimate total number of words (including unknown words)
-    self.ukp = [0.05] * powerSet # probability of unknown words
-    self.p_label = [0] * powerSet
+    self.ukp = 0.05
+    self.p_label = [0 for i in range(powerSet)]
     self.total_label = 0
     self.train(corpus)
 
@@ -26,22 +26,23 @@ class UnigramLanguageModel:
         self.total[label] += 1
     
     for i in range(powerSet):
-      self.p_label[i] = max(float(self.p_label[i]) / self.total_label, 0.0005)
+      self.p_label[i] = max(float(self.p_label[i]) / self.total_label, 0.000005)
 
-    for label in range(powerSet):
-      self.ukp[label] = (1.0 - self.p_label[label]) * 0.1
+    # for label in range(powerSet):
+    #   self.ukp[label] = (1.0 - self.p_label[label]) * 0.1
   
   def score(self, sentence):
-    score = [0.0] * powerSet
+    score = [0.0 for i in range(powerSet)]
     for i in range(0, powerSet):
       for token in sentence:
         count = self.unigramCounts[i][token]
         if (count != 0):
-          probability = (1.0 - self.ukp[i]) * (float(count) / float(self.total[i]+self.N)) + self.ukp[i] * (1.0 / self.N)
+          probability = (1.0 - self.ukp) * (float(count) / float(self.total[i]+self.N)) + self.ukp * (1.0 / float(self.N))
         else:
-          probability = self.ukp[i] * (1.0 / float(self.N + self.total[i]))
+          probability = self.ukp * (1.0 / float(self.N + self.total[i]))
+        # probability = float(count + 1) / float(self.N + self.total[i])
         score[i] += math.log(probability)
-        score[i] += math.log(self.p_label[i])*1.0
+      score[i] += math.log(self.p_label[i])
       
     maxLabel = 0
     maxScore = score[0]
