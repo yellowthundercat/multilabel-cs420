@@ -18,5 +18,5 @@ print(test_labels.head())
 print(test.head())
 
 test_labels.to_csv('../data/clean_test_labels.csv',index=False)
-test_labels.to_csv('../data/clean_test.csv',index=False)
+test.to_csv('../data/clean_test.csv',index=False)
 
