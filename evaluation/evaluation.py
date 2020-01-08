@@ -4,6 +4,7 @@ import pandas as pd
 actual_label_path = '../data/clean_test_labels.csv'
 actual_label = pd.read_csv(actual_label_path)
 
+
 # load predicted labels
 pred_label_path = '../model/binary-linear-svc/binary-linear_svc.csv'
 pred_label = pd.read_csv(pred_label_path)
@@ -24,6 +25,15 @@ def HammingLoss(actual_label, pred_label):
   (n, l) = pred_label.shape
   total = actual_label['mismatch'].sum()
   loss = total / (n * (l - 1))
-  print(loss)
+  print('Hamming-Loss', loss)
+
 
 HammingLoss(actual_label, pred_label)
+
+# threshold = 0.3
+# while threshold < 1:
+#   filename = '../model/bert/pred/bert_' + str(threshold) + '.csv'
+#   pred_label = pd.read_csv(filename)
+#   print('threshold', threshold)
+#   HammingLoss(actual_label, pred_label)
+#   threshold = threshold + 0.1
