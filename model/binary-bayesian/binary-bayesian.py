@@ -55,7 +55,9 @@ for i in range(0, len(testLabel['id'])):
     # print(predict)
     # print(ArrayLabel[i])
     count += 1
-    if count > 200:
+    if (count % 1000 == 0):
+      print(count)
+    if count > 1000:
       break
 # print (count, countRight, countDifZero)
 del testLabel['label']

@@ -6,15 +6,14 @@ from UnigramLanguageModel import UnigramLanguageModel
 import numpy as np
 
 data_path = '../../data/small_train.csv'
-data_full_path = '../../data/train.csv'
-test_path = '../../data/test.csv'
-test_label_path = '../../data/test_labels.csv'
+data_full_path = '../../data/preprocess_train.csv'
+test_path = '../../data/preprocess_clean_test.csv'
+test_label_path = '../../data/clean_test_labels.csv'
 
-def test(LanguageModel):
-  return False
 
-train_data = preprocess.getPreprocessTrain(data_full_path)
+# train_data = preprocess.getPreprocessTrain(data_full_path)
 # test_data = preprocess.getPreprocessTest(test_path)
+train_data = pd.read_csv(data_full_path)
 
 # insert column label
 train_data['label'] = 0
@@ -37,26 +36,29 @@ for index, column in enumerate(testLabel.columns[1:-1]):
 
 testData = pd.read_csv(test_path)
 count = 0
-countRight = 0
-countDifZero = 0
 ans_predict = []
 ans_actual = []
 for i in range(0, len(testLabel['id'])):
   if testLabel['toxic'][i] != -1:
     testSentence = testData['comment_text'][i]
-    testSentence = preprocess.clean_text(testSentence)
     predict = unigram.score(testSentence)
     ans_predict.append(predict)
     ans_actual.append(testLabel['label'][i])
-    # print(predict, testLabel['label'][i])
-    # count += 1
-    # if (predict == testLabel['label'][i]):
-    #   countRight += 1
-    #   if predict != 0:
-    #     countDifZero += 1
-    # if count > 20:
+    count += 1
+    if (count % 1000 == 0):
+      print(count)
+    # if count > 200:
     #   break
-# print (count, countRight, countDifZero)
+
+output_df = pd.DataFrame({'label': ans_predict[:]})
+label_list = ['toxic','severe_toxic','obscene','threat','insult','identity_hate']
+for index, label in enumerate(label_list):
+  output_df[label] = 0
+  output_df[label] = (output_df['label'].apply(lambda x: (x >> index) & 1))
+
+del output_df['label']
+output_df = pd.concat([testData['id'], output_df], axis=1, sort=False)
+output_df.to_csv('./multi-class-bayesian-result.csv',index=False)
 
 # Making the Confusion Matrix
 ans_actual = np.asarray(ans_actual)
