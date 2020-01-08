@@ -22,8 +22,10 @@ def getPreprocessTrain(train_data_path):
   return train
   
 
-def getPreprocessText(test_data_path):
+def getPreprocessTest(test_data_path):
   test = pd.read_csv(test_data_path)
+  print('Processing text dataset for testing')
+  test["comment_text"] = test["comment_text"].apply(clean_text)
   return test
 
 

@@ -4,3 +4,5 @@ preprocess/__pycache__/
 model/binary-bayesian/__pycache__/
 
 model/multi-class-bayesian/__pycache__/
+
+model/binary-bayesian/__pycache__/
