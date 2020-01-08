@@ -55,8 +55,8 @@ class UnigramLanguageModel:
         NoScore[i] += math.log(countNo + 1)
         NoScore[i] -= math.log(self.totalNo[i] + 70000)
 
-        YesScore[i] += math.log(self.p_label[i])
-        NoScore[i] += math.log(1.0 - self.p_label[i])
+        YesScore[i] += math.log(self.p_label[i])*0.1
+        NoScore[i] += math.log(1.0 - self.p_label[i])*0.1
       
       # print('Test ', i)
       # print(YesScore)
