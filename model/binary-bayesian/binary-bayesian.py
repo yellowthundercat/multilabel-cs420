@@ -10,7 +10,7 @@ data_full_path = '../../data/train.csv'
 test_path = '../../data/test.csv'
 test_label_path = '../../data/test_labels.csv'
 
-train_data = preprocess.getPreprocessTrain(data_full_path)
+train_data = preprocess.getPreprocessTrain(data_path)
 #train_data = preprocess.getPreprocessTrain(data_path)
 # test_data = preprocess.getPreprocessTest(test_path)
 

@@ -34,7 +34,7 @@ class UnigramLanguageModel:
             self.nonInUnigramCounts[column][token] += 1
     
     for i in range(6):
-      self.p_label[i] = float(self.p_label[i]) / self.p_label[6]
+      self.p_label[i] = max(float(self.p_label[i]) / self.p_label[6], 0.05)
     print(self.total)
   
   def score(self, sentence):
