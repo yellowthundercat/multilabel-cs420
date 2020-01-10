@@ -11,8 +11,6 @@ test_path = '../../data/preprocess_clean_test.csv'
 test_label_path = '../../data/clean_test_labels.csv'
 
 
-# train_data = preprocess.getPreprocessTrain(data_full_path)
-# test_data = preprocess.getPreprocessTest(test_path)
 train_data = pd.read_csv(data_full_path)
 
 # insert column label
@@ -47,8 +45,6 @@ for i in range(0, len(testLabel['id'])):
     count += 1
     if (count % 1000 == 0):
       print(count)
-    # if count > 200:
-    #   break
 
 output_df = pd.DataFrame({'label': ans_predict[:]})
 label_list = ['toxic','severe_toxic','obscene','threat','insult','identity_hate']

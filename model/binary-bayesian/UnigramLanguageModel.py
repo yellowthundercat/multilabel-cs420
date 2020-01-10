@@ -1,6 +1,5 @@
 import math, collections
 powerSet = 6
-thresh_hold = 0.1
 listLabel = ['toxic','severe_toxic','obscene','threat','insult','identity_hate']
 
 class UnigramLanguageModel:
@@ -17,7 +16,7 @@ class UnigramLanguageModel:
 
   def train(self, corpus):
     for index in range(min(1000, len(corpus['comment_text']))):
-    # for index in range(len(corpus['comment_text'])):
+    
       if (index % 1000) == 0: 
         print(index/1000)
       sentence = corpus['comment_text'][index]
@@ -27,9 +26,7 @@ class UnigramLanguageModel:
         if corpus[label][index] == 1:
           self.p_label[column] += 1
         for token in sentence:
-          # if column == 0:
-          #   self.unigramCounts[6][token] = self.unigramCounts[6][token] + 1
-          #   self.totalYes[6] += 1
+          
           
           if corpus[label][index] == 1:
             self.unigramCounts[column][token] += 1
@@ -59,7 +56,7 @@ class UnigramLanguageModel:
           noPro = (1.0 - self.ukp) * (float(countNo) / float(self.totalNo[i]+self.N)) + self.ukp * (1.0 / float(self.N))
         else:
           noPro = self.ukp * (1.0 / float(self.N + self.totalNo[i]))
-        # print(yesPro, noPro, countYes, countNo, self.totalYes[i], self.totalNo[i])
+        
         
         YesScore[i] += math.log(yesPro)
         NoScore[i] += math.log(noPro)
@@ -67,13 +64,6 @@ class UnigramLanguageModel:
       YesScore[i] += math.log(self.p_label[i])
       NoScore[i] += math.log(1.0 - self.p_label[i])
       
-      # print('Test ', i)
-      # print(YesScore)
-      # print(NoScore)
-      
-    # print('test')  
-    # print(YesScore)
-    # print(NoScore)
     
     maxLabel = [0 for i in range(powerSet)]
     for i in range(0, powerSet):

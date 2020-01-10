@@ -12,11 +12,13 @@ The github includes:
   - Evaluation using Hamming-Loss
 
 ##### Powerset using Naive Bayesian
+[Colab notebook](https://colab.research.google.com/drive/1EBXVLeoPRWydzW0cXWg2Oijpp7Ic4xIc)
 ##### Powerset using Random Forest
 [Colab notebook](https://colab.research.google.com/drive/1htwCaWZuCKVlwEeOw_7l1wDxuEOaBn7L)
 ##### OneVsAll using Linear SVC
 [Colab notebook](https://colab.research.google.com/drive/1QtMF8tO9y_DBCwV0uex_81bVxTGyNgt7)
 ##### OneVsAll using Naive Bayesian
+[Colab notebook](https://colab.research.google.com/drive/1wZVsZdIjPGQaSM_nEeoTLuWkAovex3hq)
 ##### Transfer learning using BERT
 
 
