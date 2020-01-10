@@ -1,6 +1,6 @@
 # Approaches to multi-label classification for text
 
-The github is for final project of CS418-Natural Language Processing course. The report can be found [here]().
+The github is for final project of CS418-Natural Language Processing course. The report can be found [here](https://drive.google.com/file/d/1AiIl0D1lvH6X2rFLtBiD2odlmrXEdNY0/view?usp=sharing).
 The github includes:
   - Dataset from [Kaggle Toxic Comment Classification Challenge](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/)
   - Implementation and Colab Notebook of 5 models:
